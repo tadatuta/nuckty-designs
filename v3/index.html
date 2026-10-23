@@ -1,0 +1,35 @@
+<!doctype html><html lang="en" id="top"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="nuckty: a static site generator with Markdown, BEMJSON and TypeScript templates."><title>A website, by the book · nuckty</title><link rel="icon" href="./favicon.svg">  <script type="module" crossorigin src="./assets/main-Dnx9Bw5H.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/main-Dm70gH4x.css">
+</head><body><a class="skip" href="#main">Skip to content</a><div class="page"><aside class="rail"><a class="rail__brand" href="./">nuckty</a><p class="rail__description">A static site generator.</p><nav class="rail__pages" aria-label="Main navigation"><a href="./" aria-current="page">Overview</a><a href="./use-cases/" >Use cases</a><a href="./how/start/" >Getting started</a></nav><nav class="rail__contents" aria-label="On this page"><a href="#inputs">Source</a><a href="#engine">Templates</a><a href="#sitemap">Sitemap</a><a href="#project">Your project</a><a href="#output">Output</a></nav><div class="rail__bottom"><a href="https://github.com/nuckty/nuckty">GitHub ↗</a><a href="https://nuckty.com/docs">Documentation</a></div></aside><main id="main"><header class="intro"><h1>A website,<br>by the book.</h1><p>nuckty turns Markdown and BEMJSON into static websites, using TypeScript templates for the interface.</p><div class="intro__actions"><a class="button" href="./how/start/">Open the guide</a><a href="https://github.com/nuckty/nuckty">View source</a></div></header>
+<section class="inputs" id="inputs"><h2>Begin with the source</h2><div class="inputs__pair"><figure class="specimen" data-ui><figcaption>Write the content</figcaption><pre><code># Field guide
+
+Markdown guides, with an interface built from blocks.</code></pre></figure><figure class="specimen" data-ui><figcaption>Shape the interface</figcaption><pre><code>{
+  "block": "card",
+  "content": [
+    { "elem": "title",
+      "content": "Field guide" }
+  ]
+}</code></pre></figure></div><p>Authors keep the words in Markdown. Developers define blocks, elements and the markup around them.</p></section>
+<section class="engine" id="engine"><h2>One engine, two inputs</h2><p><strong>From Markdown to BEMJSON.</strong> Content becomes a tree of blocks. nu templates process both content and document blocks, so one engine shapes the whole page.</p><figure class="specimen" data-ui><figcaption>A nu template</figcaption><pre><code>import { block } from 'nuckty';
+
+export default function templates(): void {
+  block('card')({ tag: 'article' });
+  block('card').elem('title')({ tag: 'h2' });
+  block('card').elem('description')({ tag: 'p' });
+}</code></pre></figure><div class="rendered" data-ui><p class="rendered__label">The resulting page</p><h3>Field guide</h3><p>Markdown guides, with an interface built from blocks.</p><a href="https://nuckty.com/how/templates">Read about templates</a></div></section>
+<section class="map" id="sitemap"><h2>A place for every page</h2><p>Your sitemap connects source files to published URLs. Source links in Markdown become website links.</p><div class="map__instrument" data-ui><form class="map__form"><label>Source file<input id="source-file" value="about.md" maxlength="80" spellcheck="false"></label><label>Public route<input id="page-route" value="/about" maxlength="80" spellcheck="false"></label><button class="map__reset" type="reset">Reset example</button></form><p class="map__help">Edit either field to inspect this sitemap example.</p><pre><code id="sitemap-output">sitemap:
+  - Home [/, index.md]
+  - About [/about, about.md]</code></pre><div class="map__result"><p>Internal source link</p><code id="source-link">[About](about.md)</code><p>Published link</p><code id="result-link">/about</code></div><p id="map-status" aria-live="polite"></p></div><p class="note">This is a sitemap illustration. The complete nuckty build runs in Node.js.</p></section>
+<section class="project" id="project"><h2>Keep the project yours</h2><p><strong>Shared blocks, separate sites.</strong> Each target has its own sitemap, language and domain. Authors supply translations; nuckty passes hreflang data to the document handler.</p><figure class="specimen" data-ui><figcaption>A target and its extensions</figcaption><pre><code>export default defineNucktyConfig({
+  targets: {
+    main: {
+      configDir: 'config/',
+      outDir: 'site/',
+      lang: 'en',
+      host: 'localhost'
+    }
+  },
+  ext: ['nuckty-ext-block-root']
+});</code></pre></figure><p><strong>Add only the capabilities you need.</strong> Galleries, video, commands and build stages use the same extension contract: <code>register(env)</code>.</p><a href="https://nuckty.com/ext">Browse the extensions</a></section>
+<section class="output" id="output"><h2>The output is files</h2><p>Build once, then copy the artifact to a compatible host. The server does not need nuckty to serve the pages.</p><dl class="output__list"><div><dt>Pages</dt><dd><code>html/</code></dd></div><div><dt>Hashed styles and scripts</dt><dd><code>css/ · js/</code></dd></div><div><dt>Images</dt><dd><code>svg/ · png/ · …</code></dd></div><div><dt>Compressed copies</dt><dd><code>brotli/ · gzip/</code></dd></div><div><dt>Sizes and hashes</dt><dd><code>manifest.json</code></dd></div><div><dt>Apache configuration</dt><dd><code>.htaccess</code></dd></div><div><dt>nginx configuration</dt><dd><code>.build/nginx.conf</code></dd></div></dl><p>For dynamic data, authentication or persistent application state, add a server API. A CMS and visual editor are outside the core.</p><a href="./use-cases/">Find where nuckty fits</a></section>
+<section class="closing" id="start"><h2>Start with one page</h2><p>Download the starter, build it, then edit your first Markdown file.</p><a class="button" href="./how/start/">Open the guide</a></section><footer class="footer"><p>nuckty. Made for written things.</p><div><a href="https://github.com/nuckty/nuckty/blob/main/LICENSE">MIT licensed</a><a href="#top">Back to top</a></div></footer></main></div></body></html>

@@ -1,0 +1,58 @@
+<!doctype html><html lang="en" id="top"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Download the nuckty starter, build your first page, then add content and blocks."><meta name="theme-color" content="#f7f9fa"><title>Getting started · nuckty</title><link rel="icon" href="../../favicon.svg"><link rel="preload" href="../../fonts/epilogue-900.ttf" as="font" type="font/ttf" crossorigin>  <script type="module" crossorigin src="../../assets/main-D28NlAtl.js"></script>
+  <link rel="stylesheet" crossorigin href="../../assets/main-Bgc8otKc.css">
+</head><body class="page page_start"><a class="skip-link" href="#main">Skip to content</a><header class="header"><a class="header__logo" href="../../" aria-label="nuckty home">nuckty</a><nav class="header__nav" aria-label="Main navigation"><a href="../../use-cases/" >Use cases</a><a href="https://nuckty.com/docs">Docs</a><a href="https://github.com/nuckty/nuckty">GitHub ↗</a></nav><a class="button header__action" href="../../how/start/" aria-current="page">Start building</a><button class="header__menu" aria-controls="mobile-menu" aria-expanded="false" hidden>Menu</button><nav class="header__mobile" id="mobile-menu" aria-label="Mobile navigation" hidden><a href="../../use-cases/">Use cases</a><a href="../../how/start/">Getting started</a><a href="https://nuckty.com/docs">Documentation</a><a href="https://github.com/nuckty/nuckty">GitHub</a></nav></header><main id="main"><section class="page-intro section" data-chapter="light"><h1>Getting<br>started.</h1><div class="page-intro__body"><p>Download the starter, build a first page and edit its text. Then add pages and blocks of your own. For details, see <a href="https://nuckty.com/how">How to use</a>.</p>
+<a class="button" href="https://nuckty.com/nuckty-starter.zip">Download starter <svg class="arrow" viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M8 32 32 8M8 8h24v24" stroke="currentColor" stroke-width="2.5"/></svg></a></div></section><div class="guide"><aside class="guide__contents"><nav aria-label="On this page"><p>In this guide</p><a href="#requirements">Requirements</a><a href="#download-the-starter">Download the starter</a><a href="#build-and-preview-the-page">Build and preview the page</a><a href="#edit-the-content">Edit the content</a><a href="#explore-the-configuration">Explore the configuration</a><a href="#add-a-page">Add a page</a><a href="#build-output">Build output</a><a href="#what-s-next">What's next</a></nav><a class="guide__download" href="https://nuckty.com/nuckty-starter.zip">Download starter ↗</a></aside><article class="guide__article"><section id="requirements" class="guide__section"><h2 data-reveal>Requirements</h2><div class="article-copy"><p data-reveal>Building requires <strong>Node.js 24+</strong>, <strong>npm</strong>, and public npm access for dependencies. Install nginx to preview with <code>npm run serve</code>; the build itself does not need it.</p>
+</div></section><section id="download-the-starter" class="guide__section"><h2 data-reveal>Download the starter</h2><div class="article-copy"><p data-reveal><a href="https://nuckty.com/nuckty-starter.zip">Download nuckty-starter.zip</a></p>
+<p data-reveal>Extract the archive and open <code>nuckty-starter</code> in a terminal:</p>
+<pre><code>cd nuckty-starter
+npm install
+</code></pre>
+<p data-reveal>The <code>packages/</code> directory contains prepared archives of the core and all ten extensions. <code>package.json</code> initially installs the core, the <code>root</code> document wrapper and the <code>serve</code> preview commands; follow the <a href="https://nuckty.com/ext">catalogue</a> to add other extensions. Package dependencies come from public npm. This project does not need sibling source repositories.</p>
+</div></section><section id="build-and-preview-the-page" class="guide__section"><h2 data-reveal>Build and preview the page</h2><div class="article-copy"><p data-reveal>The build also generates <code>.build/nginx.conf</code>. Its generator rejects paths containing a dollar sign (<code>$</code>) or control characters; choose a project directory without them.</p>
+<pre><code>npm run build
+npm run serve
+</code></pre>
+<p data-reveal>Open <code>http://localhost:8080</code>. The build wrote <code>site/html/index.html</code>, and nginx serves it at <code>/</code>. To stop the preview, run <code>npm run stop</code> in another terminal from the same directory.</p>
+</div></section><section id="edit-the-content" class="guide__section"><h2 data-reveal>Edit the content</h2><div class="article-copy"><p data-reveal>Open <code>content/index.md</code>, replace the heading and add a paragraph:</p>
+<pre><code># My first website
+
+This page is built with nuckty: Markdown → BEMJSON → HTML.
+</code></pre>
+<p data-reveal>Run <code>npm run build</code> and reload the page. The server keeps serving files from <code>site/</code>, so a content edit does not require restarting it.</p>
+</div></section><section id="explore-the-configuration" class="guide__section"><h2 data-reveal>Explore the configuration</h2><div class="article-copy"><p data-reveal><code>config/config-nuckty.ts</code> defines one <a href="https://nuckty.com/how/targets">target</a> — one website build:</p>
+<pre><code>import { defineNucktyConfig } from &#39;nuckty&#39;;
+
+export default defineNucktyConfig({
+    targets: {
+        main: { configDir: &#39;config/&#39;, outDir: &#39;site/&#39;, lang: &#39;en&#39;, host: &#39;localhost&#39; },
+    },
+    ext: [&#39;nuckty-ext-block-root&#39;, &#39;nuckty-ext-command-serve&#39;],
+});
+</code></pre>
+<p data-reveal><code>root</code> provides the <a href="https://nuckty.com/out/html">HTML document wrapper</a>; <code>serve</code> provides preview and stop commands. <code>site.json</code> selects the <code>page</code> bundle. Its declaration in <code>blocks/page/page.bemdecl.js</code> lists the blocks:</p>
+<pre><code>module.exports = [&#39;root&#39;];
+</code></pre>
+</div></section><section id="add-a-page" class="guide__section"><h2 data-reveal>Add a page</h2><div class="article-copy"><p data-reveal>Create <code>content/about.md</code> and include it in <code>config/sitemap.yml</code>:</p>
+<pre><code>sitemap:
+  - Home [/, index.md]
+  - About [/about, about.md]
+</code></pre>
+<p data-reveal>After a build, the page is available at <code>/about</code>. Link to it from the first page as <code>[About](about.md)</code>; the engine substitutes its URL from the <a href="https://nuckty.com/how/sitemap">sitemap</a>.</p>
+</div></section><section id="build-output" class="guide__section"><h2 data-reveal>Build output</h2><div class="article-copy"><pre><code>site/
+├── html/                  ← pages
+├── css/                   ← content-hashed styles
+├── svg/                   ← logo
+├── brotli/                ← Brotli copies
+├── gzip/                  ← Gzip copies
+├── .htaccess              ← Apache configuration
+└── manifest.json          ← sizes and hashes for publication
+</code></pre>
+<p data-reveal>The artifact can be copied to a compatible server. Apache needs the required modules and permission to use <code>.htaccess</code>; see <a href="https://nuckty.com/out/hosting">hosting configuration</a>.</p>
+</div></section><section id="what-s-next" class="guide__section"><h2 data-reveal>What's next</h2><div class="article-copy"><ul>
+<li><a href="https://nuckty.com/how/bemjson">Data model: BEMJSON</a> — blocks, elements and modifiers.</li>
+<li><a href="https://nuckty.com/how/templates">nu templates</a> — define your block&#39;s markup.</li>
+<li><a href="https://nuckty.com/how/markdown">Markdown</a> — links, anchors and constructs.</li>
+<li><a href="https://nuckty.com/how/ext">Extensions</a> — add capabilities.</li>
+</ul>
+<p data-reveal>After a local install, npm scripts can invoke <code>nuckty</code> directly. In a terminal, use <code>npx nuckty …</code>.</p>
+</div></section></article></div><section class="next section" data-chapter="accent"><h2>Then, your blocks.</h2><a class="button button_light" href="https://nuckty.com/how/bemjson">Explore BEMJSON <svg class="arrow" viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M8 32 32 8M8 8h24v24" stroke="currentColor" stroke-width="2.5"/></svg></a></section></main><footer class="footer" data-chapter="dark"><div class="footer__upper"><h2 data-reveal>The next page<br>is yours.</h2><div class="footer__links"><a href="../../how/start/">Open the guide</a><a href="https://nuckty.com/nuckty-starter.zip">Download starter</a><a href="https://nuckty.com/docs">Documentation</a><a href="https://github.com/nuckty/nuckty">GitHub</a><a href="https://demo.nuckty.com">Live demo</a><a href="https://nuckty.ru/">По-русски</a></div></div><svg class="footer__wordmark" viewBox="0 0 1100 290" role="img" aria-label="nuckty"><text x="550" y="220" text-anchor="middle">nuckty</text></svg><div class="footer__bottom"><p>Sites from text and blocks.</p><p>Node.js 24+ · MIT licensed</p><a href="#top">Back to top ↑</a></div></footer></body></html>

@@ -1,0 +1,68 @@
+<!doctype html><html lang="en" id="top"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="A static site generator with Markdown, BEMJSON and TypeScript block templates."><meta name="theme-color" content="#ddd6c6"><title>nuckty — sites from text and blocks</title><link rel="icon" href="./favicon.svg"><link rel="preload" href="./fonts/franklin-700.ttf" as="font" type="font/ttf" crossorigin>  <script type="module" crossorigin src="./assets/main-B4SLLiUe.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/main-BP3L2d_M.css">
+</head><body><a class="skip-link" href="#main">Skip to content</a><header class="header"><a class="header__brand" href="./" aria-label="nuckty home">n<span class="header__mark" aria-hidden="true">{ }</span></a><nav class="header__nav" aria-label="Main navigation"><a href="./use-cases/" >Use cases</a><a href="https://nuckty.com/docs">Documentation</a><a href="https://demo.nuckty.com">Demo ↗</a></nav><a class="header__action" href="./how/start/" >Get started <span aria-hidden="true">↗</span></a><button class="header__menu" aria-expanded="false" aria-controls="mobile-nav" hidden>Menu</button><nav id="mobile-nav" class="header__mobile" aria-label="Mobile navigation" hidden><a href="./use-cases/">Use cases</a><a href="./how/start/">Get started</a><a href="https://nuckty.com/docs">Documentation</a><a href="https://demo.nuckty.com">Demo</a></nav></header><main id="main">
+<section class="hero" aria-labelledby="home-title">
+<div class="hero__name tile"><h1 id="home-title">nuckty</h1><p>A static site generator for documentation, guides and content websites.</p><div class="hero__meta"><span>Markdown in. A website out.</span><a href="https://github.com/nuckty/nuckty">Open source ↗</a></div></div>
+<div class="hero__source tile" data-ui><div class="fragment__bar"><span>card.bemjson</span><span>BEMJSON</span></div><pre class="code "><code>{
+  &quot;block&quot;: &quot;card&quot;,
+  &quot;content&quot;: [
+    { &quot;elem&quot;: &quot;title&quot;,
+      &quot;content&quot;: &quot;Field guide&quot; },
+    { &quot;elem&quot;: &quot;description&quot;,
+      &quot;content&quot;: &quot;Markdown guides, with an interface built from blocks.&quot; }
+  ]
+}</code></pre><div class="fragment__bottom">Content, as a tree of blocks.</div></div>
+<div class="hero__output tile" data-ui><div class="fragment__bar"><span>The rendered block</span><span>HTML</span></div><article class="sample"><span class="sample__glyph" aria-hidden="true">{ }</span><h2>Field guide</h2><p>Markdown guides, with an interface built from blocks.</p></article><div class="fragment__bottom"><span>Same content. Your markup.</span><a href="#playground">Try changing it ↓</a></div></div>
+<div class="hero__statement tile"><h2>Text and<br>blocks.</h2><p>Write in Markdown.<br>Build the interface with TypeScript block templates.</p></div>
+<a class="hero__start tile" href="./how/start/"><span>Start with a page.<br>Make it your own.</span><svg class="hero__arrow" aria-hidden="true" viewBox="0 0 100 100"><path d="M15 85 85 15M20 15h65v65" fill="none" stroke="currentColor" stroke-width="5"/></svg><span>Get started</span></a>
+</section>
+<section class="pipeline" aria-labelledby="pipeline-title"><div class="pipeline__intro"><h2 id="pipeline-title" data-reveal>From text<br>to website</h2><p data-reveal>One engine for your content and your layout. Every stage stays in your project.</p></div><div class="pipeline__stage pipeline__stage_markdown"><div class="pipeline__picture" data-ui data-reveal><div class="fragment__bar">content/index.md</div><pre class="code "><code># Field guide
+
+Markdown guides, with an
+interface built from blocks.</code></pre></div><h3 data-reveal>Write the content</h3><p>Markdown becomes a BEMJSON tree, ready for your templates.</p><a href="https://nuckty.com/how/markdown">About Markdown</a></div><div class="pipeline__stage pipeline__stage_template"><div class="pipeline__picture" data-ui data-reveal><div class="fragment__bar">card.nu.ts</div><pre class="code "><code>import { block } from 'nuckty';
+
+export default function templates(): void {
+  block('card')({ tag: 'article' });
+  block('card').elem('title')({ tag: 'h2' });
+  block('card').elem('description')({ tag: 'p' });
+}</code></pre></div><h3 data-reveal>Define the markup</h3><p>nu templates process both content and document blocks.</p><a href="https://nuckty.com/how/templates">Explore nu templates</a></div><div class="pipeline__stage pipeline__stage_html"><div class="pipeline__picture" data-ui data-reveal><div class="fragment__bar">site/html/index.html</div><pre class="code "><code>&lt;article class=&quot;card&quot;&gt;
+  &lt;h2 class=&quot;card__title&quot;&gt;
+    Field guide
+  &lt;/h2&gt;
+  &lt;p class=&quot;card__description&quot;&gt;
+    Markdown guides, with an
+    interface built from blocks.
+  &lt;/p&gt;
+&lt;/article&gt;</code></pre></div><h3 data-reveal>Serve the files</h3><p>The output is a static artifact. Your server does not need nuckty.</p><a href="https://nuckty.com/how/pipeline">The full pipeline</a></div></section>
+<section class="features" aria-labelledby="features-title"><div class="features__heading tile"><h2 id="features-title" data-reveal>Your project.<br>Your rules.</h2><p data-reveal>Content, templates and build logic stay together. You decide how they fit.</p><a href="./use-cases/">Find your use case ↗</a></div><div class="features__sitemap tile"><div data-ui data-reveal><div class="fragment__bar">sitemap.yml</div><pre class="code "><code>sitemap:
+  - Home [/, index.md]
+  - About [/about, about.md]</code></pre></div><h3 data-reveal>URLs you define</h3><p>One file describes the structure. Links to Markdown sources become website URLs.</p><a href="https://nuckty.com/how/sitemap">Read about sitemaps</a></div><div class="features__targets tile"><div class="targets" data-ui data-reveal><div><span>English</span><strong>nuckty.com</strong></div><div><span>Русский</span><strong>nuckty.ru</strong></div><p>Shared blocks · Separate targets</p></div><h3 data-reveal>One set of blocks.<br>More than one site.</h3><p>Each target has its own language, domain and sitemap. Authors supply translations; the engine passes hreflang data.</p><a href="https://nuckty.com/how/targets">Configure targets</a></div><div class="features__extensions tile"><h3 data-reveal>Extend the build</h3><div class="extensions" data-reveal><span>Gallery</span><span>Video</span><span>Grid</span><span>Commands</span><span>Pipeline</span></div><p>Galleries, video, commands and build stages use the same <code>register(env)</code> contract.</p><a href="https://nuckty.com/ext">Explore extensions</a></div></section>
+<section class="playground" id="playground" aria-labelledby="playground-title"><div class="playground__intro"><h2 id="playground-title" data-reveal>Try a block</h2><p data-reveal>Change the content. Follow it from BEMJSON to HTML.</p></div><div class="playground__board" data-ui><div class="playground__preview"><div class="fragment__bar">Rendered output</div><article class="sample sample_live"><span class="sample__glyph" aria-hidden="true">{ }</span><h3 id="preview-title">Field guide</h3><p id="preview-description">Markdown guides, with an interface built from blocks.</p></article></div><form class="playground__controls"><label for="card-title">Title</label><input id="card-title" name="title" value="Field guide" maxlength="40"><label for="card-description">Description</label><textarea id="card-description" name="description" maxlength="160" rows="4">Markdown guides, with an interface built from blocks.</textarea><button type="reset" class="playground__reset">Reset example</button><p class="playground__note">A preview of the card template. The full nuckty build runs in Node.js.</p></form><div class="playground__source"><div class="playground__tabs" role="tablist" aria-label="Block source" hidden><button id="tab-json" role="tab" aria-selected="true" aria-controls="panel-json" data-tab="json">BEMJSON</button><button id="tab-nu" role="tab" aria-selected="false" aria-controls="panel-nu" tabindex="-1" data-tab="nu">nu template</button><button id="tab-html" role="tab" aria-selected="false" aria-controls="panel-html" tabindex="-1" data-tab="html">HTML</button></div><div id="panel-json" role="tabpanel" aria-labelledby="tab-json" tabindex="0"><pre class="code "><code>{
+  &quot;block&quot;: &quot;card&quot;,
+  &quot;content&quot;: [
+    { &quot;elem&quot;: &quot;title&quot;,
+      &quot;content&quot;: &quot;Field guide&quot; },
+    { &quot;elem&quot;: &quot;description&quot;,
+      &quot;content&quot;: &quot;Markdown guides, with an interface built from blocks.&quot; }
+  ]
+}</code></pre></div><div id="panel-nu" role="tabpanel" aria-labelledby="tab-nu" tabindex="0"><pre class="code "><code>import { block } from 'nuckty';
+
+export default function templates(): void {
+  block('card')({ tag: 'article' });
+  block('card').elem('title')({ tag: 'h2' });
+  block('card').elem('description')({ tag: 'p' });
+}</code></pre></div><div id="panel-html" role="tabpanel" aria-labelledby="tab-html" tabindex="0"><pre class="code "><code>&lt;article class=&quot;card&quot;&gt;&lt;h2 class=&quot;card__title&quot;&gt;Field guide&lt;/h2&gt;&lt;p class=&quot;card__description&quot;&gt;Markdown guides, with an interface built from blocks.&lt;/p&gt;&lt;/article&gt;</code></pre></div></div></div></section>
+<section class="shipping" aria-labelledby="shipping-title"><div class="shipping__intro tile"><h2 id="shipping-title" data-reveal>Ready for<br>your server</h2><p data-reveal>Pages and assets, compressed copies and a manifest. The build prepares nginx and Apache configuration, too.</p><a href="https://nuckty.com/out/hosting">How the files are served ↗</a></div><div class="shipping__tree tile" data-ui data-reveal><div class="fragment__bar">The build artifact</div><pre class="code "><code>site/
+├── html/           pages
+├── css/ · js/      hashed bundles
+├── svg/ · png/     images
+├── brotli/         Brotli copies
+├── gzip/           Gzip copies
+├── manifest.json   sizes and hashes
+└── .htaccess       Apache
+
+.build/nginx.conf   nginx</code></pre></div></section>
+<section class="cta" aria-labelledby="cta-title"><div class="cta__code tile" data-ui><pre class="code "><code>npm install
+npm run build
+npm run serve</code></pre></div><div class="cta__main tile"><h2 id="cta-title" data-reveal>Build your first page</h2><p data-reveal>Download the starter, install dependencies and run the build.</p><a class="button" href="./how/start/">Get started ↗</a></div><div class="cta__aside tile"><p>Yours to build.<br>Yours to host.</p><a href="https://github.com/nuckty/nuckty/blob/main/LICENSE">MIT licensed</a></div></section>
+</main><footer class="footer"><svg class="footer__mark" role="img" aria-label="nuckty" viewBox="0 0 1200 300" preserveAspectRatio="none"><rect x="0" y="35" width="195" height="265" fill="var(--surface)"/><text x="97" y="270" text-anchor="middle" fill="var(--ink)">n</text><rect x="201" y="0" width="195" height="300" fill="var(--ink)"/><text x="298" y="270" text-anchor="middle" fill="var(--paper)">u</text><rect x="402" y="65" width="195" height="235" fill="var(--surface)"/><text x="499" y="270" text-anchor="middle" fill="var(--ink)">c</text><rect x="603" y="0" width="195" height="300" fill="var(--accent)"/><text x="700" y="270" text-anchor="middle" fill="var(--paper)">k</text><rect x="804" y="35" width="195" height="265" fill="var(--ink)"/><text x="901" y="270" text-anchor="middle" fill="var(--paper)">t</text><rect x="1005" y="65" width="195" height="235" fill="var(--surface)"/><text x="1102" y="270" text-anchor="middle" fill="var(--ink)">y</text></svg><div class="footer__bottom"><p>Sites from text and blocks.<br>Node.js 24+ · MIT licensed</p><nav aria-label="Footer navigation"><a href="https://github.com/nuckty/nuckty">GitHub ↗</a><a href="https://nuckty.com/docs">Documentation</a><a href="https://demo.nuckty.com">Try the demo</a><a href="https://nuckty.ru/">По-русски</a></nav><a class="footer__top" href="#top">Back to top ↑</a></div></footer></body></html>
